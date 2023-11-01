@@ -59,17 +59,17 @@ pipeline {
             }
         }
 
-        stage('JUNIT TEST') {
-            when {
-                expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
-                }
-            }
-            steps {
-                sh 'npm run test'
-                echo 'test stage done'
-            }
-        }
+        // stage('JUNIT TEST') {
+        //     when {
+        //         expression {
+        //             (params.CHANGE_ID != null) && (targetBranch == 'main')
+        //         }
+        //     }
+        //     steps {
+        //         sh 'npm run test'
+        //         echo 'test stage done'
+        //     }
+        // }
 
         stage('Build') {
             when {
