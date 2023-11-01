@@ -131,7 +131,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker push $DOCKERHUB_USERNAME/achat --all-tags'
+                sh 'docker push $DOCKERHUB_USERNAME/front --all-tags'
             }
         }
 
