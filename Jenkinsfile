@@ -110,17 +110,18 @@ pipeline {
             }
         }
 
-        stage('Docker Login') {
-            when {
-                expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
-                }
-            }
-            steps {
-              withCredentials([usernamePassword(credentialsId: '928642c1-11a7-49cf-8d04-e89186dc78a1', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD']) {
-                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
-                }
-            }
+	  stage('Docker Login'){
+	     when {
+        expression {
+          (params.CHANGE_ID != null) && ((targetBranch == 'Categorie_Produit'))
+        }
+    }
+            steps{
+                withCredentials([usernamePassword(credentialsId: '928642c1-11a7-49cf-8d04-e89186dc78a1', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+    }
+  }
+
         }
 
         stage('Docker Push') {
