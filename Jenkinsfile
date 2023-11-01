@@ -10,7 +10,7 @@ pipeline {
 
     environment {
         DOCKERHUB_USERNAME = "hassenzayani"
-        PROD_TAG = "${DOCKERHUB_USERNAME}/achat-front:v2.0-prod"
+        PROD_TAG = "${DOCKERHUB_USERNAME}/front:v1.0-prod"
     }
 
     parameters {
