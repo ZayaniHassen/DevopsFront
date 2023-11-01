@@ -113,7 +113,7 @@ pipeline {
 	  stage('Docker Login'){
 	     when {
         expression {
-          (params.CHANGE_ID != null) && ((targetBranch == 'Categorie_Produit'))
+          (params.CHANGE_ID != null) && ((targetBranch == 'main'))
         }
     }
             steps{
@@ -127,7 +127,7 @@ pipeline {
         stage('Docker Push') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'Categorie_Produit')
+                    (params.CHANGE_ID != null) && (targetBranch == 'main')
                 }
             }
             steps {
@@ -138,7 +138,7 @@ pipeline {
         stage('Remove Containers') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'Categorie_Produit')
+                    (params.CHANGE_ID != null) && (targetBranch == 'main')
                 }
             }
             steps {
