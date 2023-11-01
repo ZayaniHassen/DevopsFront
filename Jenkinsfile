@@ -52,14 +52,15 @@ stage('MVN COMPILE') {
       when {
         expression {
           (params.CHANGE_ID != null) && ((targetBranch == 'main'))
-        }
-      }
-            steps {
+          }
+                steps {
                 //sh 'npm install'
                  sh 'npm install --legacy-peer-deps --verbose'  
                  sh 'npm i angular-star-rating'
 
             }
+      }
+
     }
 
 	stage ('JUNIT TEST') {
@@ -67,11 +68,12 @@ stage('MVN COMPILE') {
          expression {
            (params.CHANGE_ID != null) && ((targetBranch == 'main'))
             }
-	   }
-      steps {
+     steps {
         sh 'mvn test'
         echo 'test stage done'
       }
+	   }
+     
     }
 
         stage ('Build') {
@@ -79,10 +81,11 @@ stage('MVN COMPILE') {
          expression { 
           (params.CHANGE_ID != null) && ((targetBranch == 'main'))
             }
-	  }
-      steps {
-                 sh 'node --max-old-space-size=5120 ./node_modules/@angular/cli/bin/ng build --output-path=dist'
+          steps {
+                sh 'node --max-old-space-size=5120 ./node_modules/@angular/cli/bin/ng build --output-path=dist'
       }
+	  }
+
     }
 
 	// stage ('STATIC TEST WITH SONAR') {
@@ -107,14 +110,15 @@ stage('MVN COMPILE') {
         expression {
           (params.CHANGE_ID != null) && ((targetBranch == 'main'))
         }
-    }
-    steps {
+          steps {
         script {
             if (targetBranch == 'Categorie_Produit') {
                 sh "docker build -t ${PROD_TAG} ."
             } 
         }
     }
+    }
+
 }
 
 
@@ -124,11 +128,12 @@ stage('MVN COMPILE') {
         expression {
           (params.CHANGE_ID != null) && ((targetBranch == 'main'))
         }
-    }
-            steps{
+                     steps{
                 withCredentials([usernamePassword(credentialsId: '928642c1-11a7-49cf-8d04-e89186dc78a1', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
     }
+    }
+
   }
 
         }
@@ -140,10 +145,11 @@ stage('MVN COMPILE') {
         expression {
           (params.CHANGE_ID != null) && ((targetBranch == 'Categorie_Produit'))
         }
-    }
-            steps{
+                steps{
                 sh 'docker push $DOCKERHUB_USERNAME/achat --all-tags '
             }
+    }
+
         }
 
 	  
