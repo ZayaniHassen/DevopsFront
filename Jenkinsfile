@@ -35,7 +35,7 @@ pipeline {
             }
         }
 
-        stage('Clean') {
+        stage('NPM Clean') {
             when {
                 expression { 
                     (params.CHANGE_ID != null) && (targetBranch == 'main')
@@ -47,7 +47,7 @@ pipeline {
             }
         }
 
-        stage('MVN COMPILE') {
+        stage('NPM INSTALL') {
             when {
                 expression {
                     (params.CHANGE_ID != null) && (targetBranch == 'main')
