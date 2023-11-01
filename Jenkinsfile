@@ -36,8 +36,9 @@ pipeline {
           when {
          expression { 
            (params.CHANGE_ID != null)  && ( ((targetBranch == 'main') )
-            }
+            
      }
+                                           
             steps {
               
                 sh 'npm cache clean --force'
@@ -45,6 +46,7 @@ pipeline {
             }
         }
       }
+          }
 
 stage('MVN COMPILE') {
       when {
