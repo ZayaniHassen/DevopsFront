@@ -77,7 +77,7 @@ stage('MVN COMPILE') {
         stage ('Build') {
 	when {
          expression { 
-          (params.CHANGE_ID != null)  &&  (targetBranch == 'main') )
+          (params.CHANGE_ID != null) && ((targetBranch == 'main'))
             }
 	  }
       steps {
