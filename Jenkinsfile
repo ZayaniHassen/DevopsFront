@@ -66,7 +66,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn test'
+                sh 'npm run test'
                 echo 'test stage done'
             }
         }
