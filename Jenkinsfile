@@ -10,7 +10,7 @@ pipeline {
 
     environment {
         DOCKERHUB_USERNAME = "hassenzayani"
-        PROD_TAG = "${DOCKERHUB_USERNAME}/front:v1.0-prod"
+        PROD_TAG = "${DOCKERHUB_USERNAME}/front:angular"
     }
 
     parameters {
@@ -59,17 +59,6 @@ pipeline {
             }
         }
 
-        // stage('JUNIT TEST') {
-        //     when {
-        //         expression {
-        //             (params.CHANGE_ID != null) && (targetBranch == 'main')
-        //         }
-        //     }
-        //     steps {
-        //         sh 'npm run test'
-        //         echo 'test stage done'
-        //     }
-        // }
 
         stage('Build') {
             when {
@@ -82,18 +71,7 @@ pipeline {
             }
         }
 
-        // stage ('STATIC TEST WITH SONAR') {
-        //     when {
-        //         expression {
-        //             (params.CHANGE_ID != null) && (targetBranch == 'main')
-        //         }
-        //     }
-        //     steps {
-        //         withSonarQubeEnv('sonarqube') {
-        //             sh 'mvn sonar:sonar'
-        //         }
-        //     }
-        // }
+
 
         stage('Build Docker') {
             when {
@@ -103,7 +81,7 @@ pipeline {
             }
             steps {
                 script {
-                    if (targetBranch == 'Categorie_Produit') {
+                    if (targetBranch == 'main') {
                         sh "docker build -t ${PROD_TAG} ."
                     } 
                 }
