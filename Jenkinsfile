@@ -9,7 +9,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USERNAME = "hassenzayani"
+        DOCKERHUB_USERNAME = "ghiloufiw"
         PROD_TAG = "${DOCKERHUB_USERNAME}/front:angular"
     }
 
@@ -28,7 +28,7 @@ pipeline {
 
                     git branch: branchName,
                         url: 'https://github.com/ZayaniHassen/DevopsFront.git',
-                        credentialsId: '71b257c7-ecbb-4b16-8294-ddd1f4ac0a5e'
+                        credentialsId: 'fbbc561b-d65d-4aee-9ae3-0aabdd4a6163'
                 }
                 echo "Current branch name: ${branchName}"
                 echo "Current target branch: ${targetBranch}"
@@ -38,7 +38,7 @@ pipeline {
         stage('NPM Clean') {
             when {
                 expression { 
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Reglement')
                 }
             }
             steps {
@@ -50,7 +50,7 @@ pipeline {
         stage('NPM INSTALL') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Reglement')
                 }
             }
             steps {
@@ -63,7 +63,7 @@ pipeline {
         stage('Build') {
             when {
                 expression { 
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Reglement')
                 }
             }
             steps {
@@ -76,12 +76,12 @@ pipeline {
         stage('Build Docker') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Reglement')
                 }
             }
             steps {
                 script {
-                    if (targetBranch == 'main') {
+                    if (targetBranch == 'Reglement') {
                         sh "docker build -t ${PROD_TAG} ."
                     } 
                 }
@@ -91,11 +91,11 @@ pipeline {
 	  stage('Docker Login'){
 	     when {
         expression {
-          (params.CHANGE_ID != null) && ((targetBranch == 'main'))
+          (params.CHANGE_ID != null) && ((targetBranch == 'Reglement'))
         }
     }
             steps{
-                withCredentials([usernamePassword(credentialsId: '928642c1-11a7-49cf-8d04-e89186dc78a1', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: '1b9b7429-997c-40ff-af6e-fd502cb9c06d', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
     }
   }
@@ -105,7 +105,7 @@ pipeline {
         stage('Docker Push') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Reglement')
                 }
             }
             steps {
@@ -116,7 +116,7 @@ pipeline {
         stage('Remove Containers') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Reglement')
                 }
             }
             steps {
