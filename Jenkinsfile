@@ -55,7 +55,6 @@ pipeline {
             }
             steps {
                 sh 'npm install --legacy-peer-deps --verbose'
-                sh 'npm i angular-star-rating'
             }
         }
 
