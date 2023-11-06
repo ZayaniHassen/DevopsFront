@@ -3,13 +3,13 @@ def getGitBranchName() {
 }
 
 def branchName
-def targetBranch 
+def targetBranch
 
 pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USERNAME = "hassenzayani"
+        DOCKERHUB_USERNAME = "azizkhattech"
         PROD_TAG = "${DOCKERHUB_USERNAME}/front:angular"
     }
 
@@ -28,7 +28,7 @@ pipeline {
 
                     git branch: branchName,
                         url: 'https://github.com/ZayaniHassen/DevopsFront.git',
-                        credentialsId: '71b257c7-ecbb-4b16-8294-ddd1f4ac0a5e'
+                        credentialsId: 'a4537a2d-8cd1-482b-a725-5710e377a870'
                 }
                 echo "Current branch name: ${branchName}"
                 echo "Current target branch: ${targetBranch}"
@@ -37,8 +37,8 @@ pipeline {
 
         stage('NPM Clean') {
             when {
-                expression { 
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                expression {
+                    (params.CHANGE_ID != null) && (targetBranch == 'Facture')
                 }
             }
             steps {
@@ -50,20 +50,19 @@ pipeline {
         stage('NPM INSTALL') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Facture')
                 }
             }
             steps {
                 sh 'npm install --legacy-peer-deps --verbose'
-                sh 'npm i angular-star-rating'
             }
         }
 
 
         stage('Build') {
             when {
-                expression { 
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                expression {
+                    (params.CHANGE_ID != null) && (targetBranch == 'Facture')
                 }
             }
             steps {
@@ -76,14 +75,14 @@ pipeline {
         stage('Build Docker') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Facture')
                 }
             }
             steps {
                 script {
                     if (targetBranch == 'main') {
                         sh "docker build -t ${PROD_TAG} ."
-                    } 
+                    }
                 }
             }
         }
@@ -91,11 +90,11 @@ pipeline {
 	  stage('Docker Login'){
 	     when {
         expression {
-          (params.CHANGE_ID != null) && ((targetBranch == 'main'))
+          (params.CHANGE_ID != null) && ((targetBranch == 'Facture'))
         }
     }
             steps{
-                withCredentials([usernamePassword(credentialsId: '928642c1-11a7-49cf-8d04-e89186dc78a1', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'cd4709e6-a15a-438c-87ac-5b94afe861d8', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
     }
   }
@@ -105,7 +104,7 @@ pipeline {
         stage('Docker Push') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Facture')
                 }
             }
             steps {
@@ -116,7 +115,7 @@ pipeline {
         stage('Remove Containers') {
             when {
                 expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
+                    (params.CHANGE_ID != null) && (targetBranch == 'Facture')
                 }
             }
             steps {
