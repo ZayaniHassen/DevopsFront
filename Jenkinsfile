@@ -147,9 +147,7 @@ pipeline {
 }
 
 
-def getGitBranchName() {
-    return scm.branches[0].name
-}
+
 
 def notifySuccess() {
     def imageUrl = 'https://www.weodeo.com/wp-content/uploads/2023/02/DevOps-scaled.webp' // Replace with the actual URL of your image
