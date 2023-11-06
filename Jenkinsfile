@@ -142,15 +142,10 @@ pipeline {
                 }
             }
         }
-
-       
+ 
     }
 }
-       // def notifySuccess() {   
-       //      emailext body: "YEEEEY, The Jenkins job was successful.\n You can view the build at: ${BUILD_URL}",
-       //          subject: "Jenkins Job - Success",
-       //          to: 'hassen.zayani@esprit.tn'
-       //    }
+
 
     def notifySuccess() {
     def imageUrl = 'https://www.weodeo.com/wp-content/uploads/2023/02/DevOps-scaled.webp'  // Replace with the actual URL of your image
