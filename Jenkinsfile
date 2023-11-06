@@ -146,11 +146,31 @@ pipeline {
        
     }
 }
-       def notifySuccess() {   
-            emailext body: "YEEEEY, The Jenkins job was successful.\n You can view the build at: ${BUILD_URL}",
-                subject: "Jenkins Job - Success",
-                to: 'hassen.zayani@esprit.tn'
-          }
+       // def notifySuccess() {   
+       //      emailext body: "YEEEEY, The Jenkins job was successful.\n You can view the build at: ${BUILD_URL}",
+       //          subject: "Jenkins Job - Success",
+       //          to: 'hassen.zayani@esprit.tn'
+       //    }
+
+    def notifySuccess() {
+    def imageUrl = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.weodeo.com%2Fdigitalisation%2Fdevops-quest-ce-que-cest%2F&psig=AOvVaw0tGP62scwTt6mrUF-xsO-4&ust=1699387456378000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCIjApOCVsIIDFQAAAAAdAAAAABAE'  // Replace with the actual URL of your image
+
+    emailext body: """
+        <html>
+            <body>
+                <p>YEEEEY, The Jenkins job was successful.</p>
+                <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
+                <p><img src="${imageUrl}" alt="Your Image"></p>
+            </body>
+        </html>
+    """,
+    subject: "Jenkins Job - Success",
+    to: 'hassen.zayani@esprit.tn',
+    mimeType: 'text/html'
+}
+
+
+
 
 def notifyFailure() {
             emailext body: "OUUUPS, The Jenkins job failed.\n You can view the build at: ${BUILD_URL}",
