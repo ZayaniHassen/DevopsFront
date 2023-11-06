@@ -147,13 +147,18 @@ pipeline {
 }
 
 
+def getGitBranchName() {
+    return scm.branches[0].name
+}
+
 def notifySuccess() {
     def imageUrl = 'https://www.weodeo.com/wp-content/uploads/2023/02/DevOps-scaled.webp' // Replace with the actual URL of your image
     def imageWidth = '800px' // Set the desired width in pixels
     def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
 
-    // Read the console log file and include its contents in the email body
-    def consoleLog = readFile("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log")
+    // Save the console log to a file
+    def logFilePath = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/console.log"
+    sh "tee ${logFilePath} < \${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log"
     
     emailext(
         body: """
@@ -163,7 +168,7 @@ def notifySuccess() {
                     <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
                     <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
                     <p>Console Log:</p>
-                    <pre>${consoleLog}</pre>
+                    <p><a href="file://${logFilePath}">Download Console Log</a></p>
                 </body>
             </html>
         """,
@@ -172,4 +177,5 @@ def notifySuccess() {
         mimeType: 'text/html'
     )
 }
+
 
