@@ -145,34 +145,17 @@ pipeline {
 
 
 
+       
+    }
+}
        def notifySuccess() {   
             emailext body: "YEEEEY, The Jenkins job was successful.\n You can view the build at: ${BUILD_URL}",
                 subject: "Jenkins Job - Success",
                 to: 'hassen.zayani@esprit.tn'
-}
+          }
 
 def notifyFailure() {
             emailext body: "OUUUPS, The Jenkins job failed.\n You can view the build at: ${BUILD_URL}",
                 subject: "Jenkins Job - Failure",
                 to: 'hassen.zayani@esprit.tn'
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
-    }
-}
