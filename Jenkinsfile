@@ -155,9 +155,10 @@ def notifySuccess() {
     def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
 
     // Save the console log to a file
-    def logFilePath = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/console.log"
-    sh "tee ${logFilePath} < \${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log"
-    
+    def consoleLog = readFile("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log")
+    def logFile = "${WORKSPACE}/console.log"
+    writeFile file: logFile, text: consoleLog
+
     emailext(
         body: """
             <html>
@@ -165,15 +166,17 @@ def notifySuccess() {
                     <p>YEEEEY, The Jenkins job was successful.</p>
                     <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
                     <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
-                    <p>Console Log:</p>
-                    <p><a href="file://${logFilePath}">Download Console Log</a></p>
+                    <p>Console Log is attached.</p>
                 </body>
             </html>
         """,
         subject: "Jenkins Job - Success",
         to: 'hassen.zayani@esprit.tn',
+        attachLog: true,  // Attach the log file
+        attachmentsPattern: logFile,  // Specify the file to attach
         mimeType: 'text/html'
     )
 }
+
 
 
