@@ -154,13 +154,15 @@ pipeline {
 
     def notifySuccess() {
     def imageUrl = 'https://www.weodeo.com/wp-content/uploads/2023/02/DevOps-scaled.webp'  // Replace with the actual URL of your image
+    def imageWidth = '200px';  // Set the desired width in pixels
+    def imageHeight = 'auto';  // Set 'auto' to maintain the aspect ratio
 
     emailext body: """
         <html>
             <body>
                 <p>YEEEEY, The Jenkins job was successful.</p>
                 <p>You can view the build at: <a href="${BUILD_URL}">${BUILD_URL}</a></p>
-                <p><img src="${imageUrl}" alt="Your Image"></p>
+                <p><img src="${imageUrl}" alt="Your Image" width="${imageWidth}" height="${imageHeight}"></p>
             </body>
         </html>
     """,
