@@ -153,7 +153,7 @@ pipeline {
        //    }
 
     def notifySuccess() {
-    def imageUrl = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.weodeo.com%2Fdigitalisation%2Fdevops-quest-ce-que-cest%2F&psig=AOvVaw0tGP62scwTt6mrUF-xsO-4&ust=1699387456378000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCIjApOCVsIIDFQAAAAAdAAAAABAE'  // Replace with the actual URL of your image
+    def imageUrl = 'https://www.weodeo.com/wp-content/uploads/2023/02/DevOps-scaled.webp'  // Replace with the actual URL of your image
 
     emailext body: """
         <html>
