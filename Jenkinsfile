@@ -154,7 +154,7 @@ pipeline {
 
     def notifySuccess() {
     def imageUrl = 'https://www.weodeo.com/wp-content/uploads/2023/02/DevOps-scaled.webp'  // Replace with the actual URL of your image
-    def imageWidth = '200px';  // Set the desired width in pixels
+    def imageWidth = '800px';  // Set the desired width in pixels
     def imageHeight = 'auto';  // Set 'auto' to maintain the aspect ratio
 
     emailext body: """
