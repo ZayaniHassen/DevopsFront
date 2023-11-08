@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "sonarqube-scanner": "^3.0.1",
-    "sonar-scanner": "^3.1.0"
+    "sonar-scanner": "^3.1.0",
     "@angular-devkit/build-angular": "^12.0.5",
     "@angular/cli": "~12.0.1",
     "@angular/compiler-cli": "~12.0.1",
