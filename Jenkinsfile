@@ -64,40 +64,40 @@ pipeline {
             }
         }
 
-        stage('NPM Clean') {
-            when {
-                expression { 
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
-                }
-            }
-            steps {
-                sh 'npm cache clean --force'
-                sh 'rm -rf node_modules package-lock.json'
-            }
-        }
+        // stage('NPM Clean') {
+        //     when {
+        //         expression { 
+        //             (params.CHANGE_ID != null) && (targetBranch == 'main')
+        //         }
+        //     }
+        //     steps {
+        //         sh 'npm cache clean --force'
+        //         sh 'rm -rf node_modules package-lock.json'
+        //     }
+        // }
 
-        stage('NPM INSTALL') {
-            when {
-                expression {
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
-                }
-            }
-            steps {
-                sh 'npm install --legacy-peer-deps --verbose'
-            }
-        }
+        // stage('NPM INSTALL') {
+        //     when {
+        //         expression {
+        //             (params.CHANGE_ID != null) && (targetBranch == 'main')
+        //         }
+        //     }
+        //     steps {
+        //         sh 'npm install --legacy-peer-deps --verbose'
+        //     }
+        // }
 
 
-        stage('Build') {
-            when {
-                expression { 
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
-                }
-            }
-            steps {
-                sh 'node --max-old-space-size=5120 ./node_modules/@angular/cli/bin/ng build --output-path=dist'
-            }
-        }
+        // stage('Build') {
+        //     when {
+        //         expression { 
+        //             (params.CHANGE_ID != null) && (targetBranch == 'main')
+        //         }
+        //     }
+        //     steps {
+        //         sh 'node --max-old-space-size=5120 ./node_modules/@angular/cli/bin/ng build --output-path=dist'
+        //     }
+        // }
 
 
 
