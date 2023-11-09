@@ -88,18 +88,6 @@ pipeline {
         }
 
 
-        stage('Build') {
-            when {
-                expression { 
-                    (params.CHANGE_ID != null) && (targetBranch == 'main')
-                }
-            }
-            steps {
-                sh 'node --max-old-space-size=5120 ./node_modules/@angular/cli/bin/ng build --output-path=dist'
-            }
-        }
-
-
 
            stage('Static Test with Sonar') {
              // environment {
